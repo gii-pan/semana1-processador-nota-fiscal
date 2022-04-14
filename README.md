@@ -20,7 +20,7 @@ Você deve ter instalada uma JDK na versão 8 ou posterior.
 Para compilar o projeto, execute:
 
 ```sh
-javac -cp ".:libs/*" -d out br/com/alura/oobj/Main.java
+javac -cp "./libs/*" -d out br/com/alura/oobj/Main.java
 ```
 
 Esse comando terá o código compilado no diretório `out`.
@@ -30,7 +30,7 @@ Esse comando terá o código compilado no diretório `out`.
 Depois de compilado, você pode executar o projeto para processar o `itens-pedido.csv` da seguinte maneira:
 
 ```sh
-java -cp "out:libs/*" br.com.alura.oobj.Main itens-pedido.csv
+java -cp "out:libs/*" Main itens-pedido.csv
 ```
 
 Para processar o XML, basta passar `itens-pedido.xml` como parâmetro.

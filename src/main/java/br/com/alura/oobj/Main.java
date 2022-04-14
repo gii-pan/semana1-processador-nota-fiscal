@@ -20,6 +20,7 @@ public class Main {
     String arquivo = args[0];
 
     List<ItemPedido> itensPedido;
+    Pedido pedidoTotal = new Pedido();
 
     if (arquivo.endsWith(".csv")) {
       try {
@@ -48,11 +49,11 @@ public class Main {
       throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
     }
 
-    BigDecimal totalPedido = BigDecimal.ZERO;
-    for (ItemPedido itemPedido : itensPedido) {
-      BigDecimal subtotal = itemPedido.getValorUnitario().multiply(BigDecimal.valueOf(itemPedido.getQuantidade()));
-      totalPedido = totalPedido.add(subtotal);
-    }
+//    BigDecimal totalPedido = BigDecimal.ZERO;
+//    for (ItemPedido itemPedido : itensPedido) {
+//      BigDecimal subtotal = itemPedido.getValorUnitario().multiply(BigDecimal.valueOf(itemPedido.getQuantidade()));
+//      totalPedido = totalPedido.add(subtotal);
+//    }
 
     SubTotalPorClasseFiscal subTotalPorClasseFiscal = new SubTotalPorClasseFiscal();
     for (ItemPedido itemPedido : itensPedido) {
@@ -66,7 +67,8 @@ public class Main {
       }
     }
 
-    System.out.println("## Total do pedido: " + totalPedido);
+    pedidoTotal.setItens(itensPedido);
+    System.out.println("## Total do pedido: " + pedidoTotal.retornaValorTotalPedido());
     System.out.println("\n## Subtotal por classe fiscal");
     for (String classeFiscal : subTotalPorClasseFiscal.keySet()) {
       System.out.println("\n\tClasse fiscal: " + classeFiscal);

@@ -1,5 +1,6 @@
 package br.com.alura.oobj;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Pedido {
@@ -12,6 +13,15 @@ public class Pedido {
 
   public void setItens(List<ItemPedido> itens) {
     this.itens = itens;
+  }
+
+  public BigDecimal retornaValorTotalPedido(){
+    BigDecimal totalPedido = BigDecimal.ZERO;
+    for (ItemPedido itemPedido : itens) {
+      BigDecimal totalItemPedido = itemPedido.retornaValorDeItemPedidoTotal();
+      totalPedido = totalPedido.add(totalItemPedido);
+    }
+    return totalPedido;
   }
 
   @Override

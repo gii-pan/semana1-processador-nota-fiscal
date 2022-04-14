@@ -61,6 +61,11 @@ public class ItemPedido {
     this.classeFiscal = classeFiscal;
   }
 
+  public BigDecimal retornaValorDeItemPedidoTotal() {
+    BigDecimal valorTotal = BigDecimal.ZERO;
+    valorTotal = this.valorUnitario.multiply(BigDecimal.valueOf(this.quantidade));
+    return valorTotal;
+  }
   @Override
   public String toString() {
     return "ItemPedido{" +
