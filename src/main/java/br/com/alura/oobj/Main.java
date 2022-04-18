@@ -21,6 +21,7 @@ public class Main {
 
     List<ItemPedido> itensPedido;
     Pedido pedidoTotal = new Pedido();
+    SubTotalPorClasseFiscal subTotal = new SubTotalPorClasseFiscal();
 
     if (arquivo.endsWith(".csv")) {
       try {
@@ -49,30 +50,14 @@ public class Main {
       throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
     }
 
-//    BigDecimal totalPedido = BigDecimal.ZERO;
-//    for (ItemPedido itemPedido : itensPedido) {
-//      BigDecimal subtotal = itemPedido.getValorUnitario().multiply(BigDecimal.valueOf(itemPedido.getQuantidade()));
-//      totalPedido = totalPedido.add(subtotal);
-//    }
-
-    SubTotalPorClasseFiscal subTotalPorClasseFiscal = new SubTotalPorClasseFiscal();
-    for (ItemPedido itemPedido : itensPedido) {
-      BigDecimal novoSubTotal = itemPedido.getValorUnitario().multiply(BigDecimal.valueOf(itemPedido.getQuantidade()));
-      String classeFiscal = itemPedido.getClasseFiscal();
-      BigDecimal subTotal = subTotalPorClasseFiscal.get(classeFiscal);
-      if (subTotal != null) {
-        subTotalPorClasseFiscal.put(classeFiscal, subTotal.add(novoSubTotal));
-      } else {
-        subTotalPorClasseFiscal.put(classeFiscal, novoSubTotal);
-      }
-    }
-
     pedidoTotal.setItens(itensPedido);
+    subTotal.retornaSubtotalPorClasseFinal(itensPedido);
+
     System.out.println("## Total do pedido: " + pedidoTotal.retornaValorTotalPedido());
     System.out.println("\n## Subtotal por classe fiscal");
-    for (String classeFiscal : subTotalPorClasseFiscal.keySet()) {
+    for (String classeFiscal : subTotal.treemap.keySet()) {
       System.out.println("\n\tClasse fiscal: " + classeFiscal);
-      BigDecimal subtotal = subTotalPorClasseFiscal.get(classeFiscal);
+      BigDecimal subtotal = subTotal.treemap.get(classeFiscal);
       System.out.println("\tSubtotal: " + subtotal);
     }
 

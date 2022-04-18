@@ -21,44 +21,8 @@ public class ItemPedido {
   @CsvBindByName
   private String classeFiscal;
 
-  public Long getCodigo() {
-    return codigo;
-  }
-
-  public void setCodigo(Long codigo) {
-    this.codigo = codigo;
-  }
-
-  public String getDescricao() {
-    return descricao;
-  }
-
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
-  }
-
-  public Integer getQuantidade() {
-    return quantidade;
-  }
-
-  public void setQuantidade(Integer quantidade) {
-    this.quantidade = quantidade;
-  }
-
-  public BigDecimal getValorUnitario() {
-    return valorUnitario;
-  }
-
-  public void setValorUnitario(BigDecimal valorUnitario) {
-    this.valorUnitario = valorUnitario;
-  }
-
   public String getClasseFiscal() {
     return classeFiscal;
-  }
-
-  public void setClasseFiscal(String classeFiscal) {
-    this.classeFiscal = classeFiscal;
   }
 
   public BigDecimal retornaValorDeItemPedidoTotal() {
